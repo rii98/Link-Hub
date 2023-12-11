@@ -59,7 +59,7 @@ const Header = () => {
           </div>
         </div>
         {showNavMenu ? (
-          <div className="absolute top-full bg-blue-50 w-full pb-6 shadow-md">
+          <div className="absolute top-full bg-blue-50 w-full pb-6 shadow-md z-[9999]">
             <nav className="flex flex-col p-6 font-semibold text-blue-600 gap-4">
               <NavLink to="/">Find Jobs</NavLink>
               <NavLink to="/">Companies</NavLink>
