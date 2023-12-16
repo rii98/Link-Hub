@@ -1,17 +1,29 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link, NavLink, Outlet } from "react-router-dom";
 
 const Header = () => {
   const [showNavMenu, setShowNavMenu] = useState(false);
   const [showLogoutMenu, setShowLogoutMenu] = useState(false);
+  const [isWindowLg, setIsWindowLg] = useState(true);
+
+  useEffect(() => {
+    const windowResize = function () {
+      setIsWindowLg(window.innerWidth >= 768);
+    };
+    window.addEventListener("resize", windowResize);
+    return () => {
+      window.removeEventListener("resize", windowResize);
+    };
+  }, []);
+
   return (
     <>
       <header
         className={
-          showNavMenu ? "relative pb-4 bg-blue-50 " : "relative bg-blue-50"
+          showNavMenu ? "relative pb-4 bg-blue-50 " : "relative bg-blue-50 "
         }
       >
-        <div className="flex justify-between p-6">
+        <div className="flex justify-between p-6 md:hidden">
           <Link to="/" className="font-bold text-lg">
             <span className="text-blue-500">Link</span>
             <span className="text-blue-300">Hub</span>
@@ -58,26 +70,33 @@ const Header = () => {
             )}
           </div>
         </div>
-        {showNavMenu ? (
-          <div className="absolute top-full bg-blue-50 w-full pb-6 shadow-md z-[9999]">
-            <nav className="flex flex-col p-6 font-semibold text-blue-600 gap-4">
+        {showNavMenu || isWindowLg ? (
+          <div className="absolute top-full bg-blue-50 w-full pb-6 shadow-md z-[9999] md:flex md:justify-between md:items-center md:px-2 md:py-2 md:top-0 lg:px-6 md:relative ">
+            <Link to="/" className="font-bold text-lg hidden md:block">
+              <span className="text-blue-500">Link</span>
+              <span className="text-blue-300">Hub</span>
+            </Link>
+            <nav className="flex flex-col p-6 text-slate-600 font-semibold gap-4 md:flex-row md:gap-4  lg:gap-10">
               <NavLink to="/">Find Jobs</NavLink>
               <NavLink to="/">Companies</NavLink>
               <NavLink to="/">Upload Jobs</NavLink>
               <NavLink to="/">About</NavLink>
             </nav>
 
-            <div className="p-6 rounded-md shadow-md flex gap-2 items-center bg-white w-fit m-auto">
-              <div className="text-blue-700 text-sm">
+            <div className="p-6 rounded-md shadow-md flex gap-2 items-center bg-white w-fit m-auto md:m-0 md:p-2">
+              <div className="text-blue-700 text-sm md:hidden lg:block">
                 <p className="font-bold">riyaj_b1</p>
                 <p>riyajbhandari98@gmail.com</p>
               </div>
               <div className="flex gap-2 items-center">
                 <img
                   className="h-10 w-10 object-cover object-center rounded-[50%]"
-                  src="https://scontent.fsif1-1.fna.fbcdn.net/v/t39.30808-6/408786261_18420131257040635_3170342171552451696_n.jpg?stp=dst-jpg_p960x960&_nc_cat=1&ccb=1-7&_nc_sid=3635dc&_nc_ohc=jmsEl9Ml0RwAX_vOqRW&_nc_ht=scontent.fsif1-1.fna&oh=00_AfDxlPte8qlETNmy17o4yDyD7y7di9am5A-lM3zzQijUWg&oe=657AA466"
+                  src="anu.jpeg"
                   alt="profile"
                 />
+                <p className="font-semibold hidden md:block lg:hidden text-sm ">
+                  riyaj_b1
+                </p>
                 <div
                   className="relative cursor-pointer"
                   onClick={() => {

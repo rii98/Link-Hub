@@ -2,12 +2,13 @@ import React, { useRef, useState } from "react";
 import { CiSearch } from "react-icons/ci";
 import Footer from "../Components/Footer";
 import JobCard from "../Components/JobCard";
+import Signup from "../Components/Signup";
 
 const Home = () => {
   const searchRef = useRef();
   return (
     <>
-      <main>
+      <main className="md:pt-10">
         <h1 className="text-slate-500 py-6 font-bold text-3xl text-center px-4">
           Find Your Dream Job With Ease
         </h1>
@@ -84,6 +85,7 @@ const Home = () => {
           })}
         </section>
       </main>
+      <Signup />
       <Footer />
     </>
   );
